@@ -1,5 +1,20 @@
-<app-recipe-item></app-recipe-item>
-<app-recipe-item></app-recipe-item>
-<app-recipe-item></app-recipe-item>
-<app-recipe-item></app-recipe-item>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">Add Recipe</button>
+  </div>  
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <a class="list-group-item clearfix" *ngFor="let recipe of recipes">
+      <div class="float-start col-md-6">
+        <h4 class="list-group-item-heading">Name: {{ recipe.name }}</h4>
+        <p class="list-group-item-text">Description: {{ recipe.description }}</p>
+      </div>
+      <span class="float-end col-md-5">
+        <img alt="Recipe image" [src]="recipe.image" class="card-img" style="max-height: 100px; overflow: hidden;">
+      </span>
+    </a>
+  </div>
+</div>
+
 <app-recipe-item></app-recipe-item>
