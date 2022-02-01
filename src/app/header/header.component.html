@@ -7,11 +7,11 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Recipes<span class="visually-hidden">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="emitFeatureEvent('recipes')">Recipes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Shopping List</a>
+          <a class="nav-link" href="#" (click)="emitFeatureEvent('shopping-list')">Shopping List</a>
         </li>
       </ul>
       <ul class="navbar-nav me-1 mt-2 mt-lg-0">
