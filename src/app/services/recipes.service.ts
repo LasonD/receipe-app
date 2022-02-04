@@ -5,7 +5,20 @@ import { Recipe } from '../models/recipe.model';
   providedIn: 'root'
 })
 export class RecipesService {
-  recipes: Recipe[];
+  recipes: Recipe[] = [
+    new Recipe(
+      'Test recipe',
+      'My test recipe best description',
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg'),
+    new Recipe(
+      'Test recipe',
+      'My test recipe best description',
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg'),
+    new Recipe(
+      'Test recipe',
+      'My test recipe best description',
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg')
+  ];
 
   constructor() { }
 

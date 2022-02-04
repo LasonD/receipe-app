@@ -5,7 +5,12 @@ import { Ingredient } from '../models/ingredient.model';
   providedIn: 'root'
 })
 export class IngredientsService {
-  ingredients: Ingredient[];
+  ingredients: Ingredient[] = [
+    new Ingredient('Apple', 2, 1),
+    new Ingredient('Banana', 1, 2),
+    new Ingredient('Potato', 2, 3),
+    new Ingredient('Pork', 1.5, 4),
+  ];
 
   constructor() { }
 
