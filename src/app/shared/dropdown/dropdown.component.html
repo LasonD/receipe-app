@@ -1,7 +1,6 @@
 <div class="btn btn-group">
-  <button class="btn btn-primary dropdown-toggle" type="button">Manage</button>
-  <ul class="dropdown-menu" appDropdown>
-    <li><a>Item1</a></li>
-    <li><a>Item2</a></li>
+  <button class="btn btn-primary dropdown-toggle" type="button" (click)="onToggleClick()" [ngClass]="{show: show}">Manage</button>
+  <ul class="dropdown-menu" [ngClass]="{show: show, 'show-items': show}">
+      <ng-content></ng-content>
   </ul>
 </div>

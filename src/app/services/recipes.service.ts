@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Ingredient } from '../models/ingredient.model';
 import { Recipe } from '../models/recipe.model';
 
 @Injectable({
@@ -9,11 +10,11 @@ export class RecipesService {
     new Recipe(
       'Test recipe',
       'My test recipe best description',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg'),
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 2)]),
     new Recipe(
       'Test recipe',
       'My test recipe best description',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg'),
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 3), new Ingredient('Apple', 2),]),
     new Recipe(
       'Test recipe',
       'My test recipe best description',
