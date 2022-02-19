@@ -7,23 +7,19 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="emitFeatureEvent('recipes')">Recipes</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/recipes">Recipes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="emitFeatureEvent('shopping-list')">Shopping List</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
         </li>
       </ul>
       <ul class="navbar-nav me-1 mt-2 mt-lg-0">
         <li class="nav-item active">
-          <div class="nav-item dropdown justify-content-end">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">Manage</a>
-            <div class="dropdown-menu" aria-labelledby="dropdownId">
-              <a class="dropdown-item" href="#">Save Data</a>
-              <a class="dropdown-item" href="#">Fetch Data</a>
-            </div>
-          </div>
+          <app-dropdown name="Manage Recipe">
+            <li><a class="dropdown-item">Save data</a></li>
+            <li><a class="dropdown-item">Fetch data</a></li>
+          </app-dropdown>
         </li>
       </ul>
     </div>
