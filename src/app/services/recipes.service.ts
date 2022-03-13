@@ -8,20 +8,27 @@ import { Recipe } from '../models/recipe.model';
 export class RecipesService {
   recipes: Recipe[] = [
     new Recipe(
-      'Test recipe',
-      'My test recipe best description',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 2)]),
+      'Test recipe 1',
+      'My test recipe best description 1',
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 2)],
+      1),
     new Recipe(
-      'Test recipe',
-      'My test recipe best description',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 3), new Ingredient('Apple', 2),]),
+      'Test recipe 2',
+      'My test recipe best description 2',
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 3), new Ingredient('Apple', 2),],
+      2),
     new Recipe(
-      'Test recipe',
-      'My test recipe best description',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg')
+      'Test recipe 3',
+      'My test recipe best description 3',
+      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', null,
+      3)
   ];
 
   constructor() { }
+
+  get(id: number) {
+    return this.recipes.find(r => r.id === id);
+  }
 
   add(recipe: Recipe) {
     recipe.id = this.getNextId();

@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-md-5" [ngClass]="{
-    'col-md-5': selectedRecipe ? true : false,
-    'col-md-12': selectedRecipe ? false : true}">
-    <app-recipe-list (recipeSelected)="onRecipeSelected($event)"></app-recipe-list>
+    'col-md-5': recipeOutlet.isActivated == true
+  }">
+    <app-recipe-list></app-recipe-list>
   </div>
-  <div class="col-md-7" *ngIf="selectedRecipe">
-    <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
+  <div class="col-md-7">
+    <router-outlet #recipeOutlet="outlet"></router-outlet>
   </div>
 </div>
