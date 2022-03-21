@@ -1,22 +1,24 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-sm-8">
           <label for="name">Name</label>
-          <input id="name" type="text" class="form-control" #nameInput>
+          <input id="name" type="text" name="name" class="form-control" ngModel #nameInput="ngModel" required>
+          <span *ngIf="!nameInput.valid && nameInput.touched" class="invalid-feedback">Name cannot be empty!</span>
         </div>
         <div class="col-sm-2">
-
         </div>
         <div class="col col-sm-2">
-          <label for="name">Amount</label>
-          <input id="name" type="number" class="form-control" #amountInput>
+          <label for="amount">Amount</label>
+          <input id="amount" type="number" name="amount" class="form-control" ngModel #amountInput="ngModel" required min="0">
+          <span *ngIf="!amountInput.valid && amountInput.touched" class="invalid-feedback">Amount cannot be empty or less than 0!</span>
         </div>
       </div>
+      <br>
       <div class="row">
         <div class="col-xs-12">
-          <button type="submit" class="btn btn-success m-1" (click)="onAddClicked()">Add</button>
+          <button type="submit" class="btn btn-success m-1" [disabled]="!form.valid">{{ editMode ? 'Edit' : 'Add' }}</button>
           <button type="button" class="btn btn-danger m-1">Delete</button>
           <button type="button" class="btn btn-secondary m-1 float-end">Clear</button>
         </div>
