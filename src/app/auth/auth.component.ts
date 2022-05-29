@@ -11,6 +11,9 @@ export class AuthComponent implements OnInit {
   signUpModeName = 'Sign Up';
 
   authForm: FormGroup = new FormGroup({
+    'username': new FormControl(null, [Validators.required]),
+    'firstname': new FormControl(null, [Validators.required]),
+    'lastname': new FormControl(null, [Validators.required]),
     'email': new FormControl(null, [Validators.required, Validators.email]),
     'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
   })
@@ -35,13 +38,28 @@ export class AuthComponent implements OnInit {
   }
 
   isInvalidEmail() {
-    const emailControl = this.authForm.controls['email'];
-    return !emailControl.valid && emailControl.touched;
+    return this.isControlInvalid('email')
   }
 
   isInvalidPassword() {
-    const passwordControl = this.authForm.controls['password'];
-    return !passwordControl.valid && passwordControl.touched;
+    return this.isControlInvalid('password')
+  }
+
+  isInvalidUsername() {
+    return this.isControlInvalid('username');
+  }
+
+  isInvalidFirstname() {
+    return this.isControlInvalid('firstname');
+  }
+
+  isInvalidLastname() {
+    return this.isControlInvalid('lastname');
+  }
+
+  private isControlInvalid(controlName: string) {
+    const control = this.authForm.controls[controlName];
+    return !control.valid && control.touched;
   }
 
   onSubmit() {

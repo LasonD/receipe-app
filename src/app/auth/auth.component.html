@@ -1,7 +1,37 @@
 <div class="row">
   <div class="col-xs-12">
     <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-      <div class="">
+      <div class="mt-2" *ngIf="!isLogin">
+        <label for="username" class="form-label">Username</label>
+        <input class="form-control"
+               formControlName="username"
+               name="username"
+               id="username"
+               type="text"
+               [ngClass]="isInvalidUsername() ? 'is-invalid' : ''">
+        <span *ngIf="isInvalidUsername()" class="text-danger">A valid username should be provided!</span>
+      </div>
+      <div class="mt-2" *ngIf="!isLogin">
+        <label for="firstname" class="form-label">Firstname</label>
+        <input class="form-control"
+               formControlName="firstname"
+               name="firstname"
+               id="firstname"
+               type="text"
+               [ngClass]="isInvalidFirstname() ? 'is-invalid' : ''">
+        <span *ngIf="isInvalidFirstname()" class="text-danger">A valid firstname should be provided!</span>
+      </div>
+      <div class="mt-2" *ngIf="!isLogin">
+        <label for="lastname" class="form-label">Lastname</label>
+        <input class="form-control"
+               formControlName="lastname"
+               name="lastname"
+               id="lastname"
+               type="text"
+               [ngClass]="isInvalidLastname() ? 'is-invalid' : ''">
+        <span *ngIf="isInvalidLastname()" class="text-danger">A valid lastname should be provided!</span>
+      </div>
+      <div class="mt-2">
         <label for="email" class="form-label">Email</label>
         <input class="form-control"
                formControlName="email"
