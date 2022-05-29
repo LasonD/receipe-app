@@ -6,7 +6,6 @@ import {Subject} from "rxjs";
   providedIn: 'root'
 })
 export class IngredientsService {
-  collectionChanged = new Subject<Ingredient[]>();
   startedEditing = new Subject<number>();
 
   ingredients: Ingredient[] = [
@@ -22,12 +21,11 @@ export class IngredientsService {
     ingredient.id = this.getNextId();
 
     this.ingredients.push(ingredient);
-
-    this.collectionChanged.next(this.ingredients.slice());
   }
 
   delete(id: number) {
-    this.ingredients = this.ingredients.filter(i => i.id === id);
+    const index = this.ingredients.findIndex(i => i.id === id);
+    this.ingredients.splice(index, 1);
   }
 
   update(id: number, updated: Ingredient) {
@@ -37,12 +35,10 @@ export class IngredientsService {
       return;
     }
 
-    const target = updated[index];
+    const target = this.ingredients[index];
 
     target.name = updated.name;
     target.amount = updated.amount;
-
-    this.collectionChanged.next(this.ingredients.slice());
   }
 
   get(id: number) {

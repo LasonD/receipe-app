@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../models/ingredient.model';
 import { Recipe } from '../models/recipe.model';
+import { IngredientsService } from "./ingredients.service";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class RecipesService {
       3)
   ];
 
-  constructor() { }
+  constructor(private ingredientsService: IngredientsService) { }
 
   get(id: number) {
     return this.recipes.find(r => r.id === id);
@@ -54,11 +55,19 @@ export class RecipesService {
     target.image = updated.image;
   }
 
+  private addOrUpdateIngredient(ingredient: Ingredient) {
+    if (ingredient.id) {
+      this.ingredientsService.update(ingredient.id, ingredient);
+    } else {
+      this.ingredientsService.add(ingredient);
+    }
+  }
+
   private getNextId() {
     if (this.recipes.length === 0) {
       return 0;
     }
 
-    return Math.max(...this.recipes.map(i => i.id));
+    return Math.max(...this.recipes.map(i => i.id)) + 1;
   }
 }
