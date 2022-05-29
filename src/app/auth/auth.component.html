@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <div class="">
+        <label for="email" class="form-label">Email</label>
+        <input class="form-control"
+               formControlName="email"
+               name="email"
+               id="email"
+               type="text"
+               [ngClass]="isInvalidEmail() ? 'is-invalid' : ''">
+        <span *ngIf="isInvalidEmail()" class="text-danger">Enter a valid email!</span>
+      </div>
+      <div class="mt-2">
+        <label for="password" class="form-label">Password</label>
+        <input class="form-control"
+               id="password"
+               type="password"
+               formControlName="password"
+               [ngClass]="isInvalidPassword() ? 'is-invalid' : ''">
+        <span *ngIf="isInvalidPassword()" class="text-danger">Minimum password length is 6 symbols!</span>
+      </div>
+      <div class="mt-2">
+        <button class="btn btn-primary" [disabled]="!authForm.valid" type="submit">{{getCurrentModeName()}}</button>
+        |
+        <button class="btn btn-primary" (click)="onSwitchMode()">Switch to {{ getOppositeModeName() }}</button>
+      </div>
+    </form>
+  </div>
+</div>
