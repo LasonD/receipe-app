@@ -1,5 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, Component, ContentChild, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -13,7 +12,7 @@ export class DropdownComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
   onToggleClick() {

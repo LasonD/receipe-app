@@ -8,20 +8,23 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/recipes">Recipes</a>
+          <a class="nav-link" routerLink="/recipes" *ngIf="isLoggedIn">Recipes</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
           <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
           <a class="nav-link" routerLink="/auth">Authenticate</a>
         </li>
       </ul>
-      <ul class="navbar-nav me-1 mt-2 mt-lg-0">
+      <ul class="navbar-nav me-1 mt-2 mt-lg-0" *ngIf="isLoggedIn">
+        <li class="nav-item mt-2 me-2" routerLinkActive="active">
+          <a class="nav-link" routerLink="/auth" (click)="onLogout()">Logout</a>
+        </li>
         <li class="nav-item active">
           <app-dropdown name="Manage Recipe">
-            <li><a class="dropdown-item">Save data</a></li>
-            <li><a class="dropdown-item">Fetch data</a></li>
+            <li><a class="dropdown-item" (click)="saveRecipes()">Save data</a></li>
+            <li><a class="dropdown-item" (click)="fetchRecipes()">Fetch data</a></li>
           </app-dropdown>
         </li>
       </ul>

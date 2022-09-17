@@ -2,30 +2,44 @@ import { Injectable } from '@angular/core';
 import { Ingredient } from '../models/ingredient.model';
 import { Recipe } from '../models/recipe.model';
 import { IngredientsService } from "./ingredients.service";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesService {
-  recipes: Recipe[] = [
-    new Recipe(
-      'Test recipe 1',
-      'My test recipe best description 1',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 2)],
-      1),
-    new Recipe(
-      'Test recipe 2',
-      'My test recipe best description 2',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 3), new Ingredient('Apple', 2),],
-      2),
-    new Recipe(
-      'Test recipe 3',
-      'My test recipe best description 3',
-      'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', null,
-      3)
-  ];
+  recipesChanged: Subject<Recipe[]> = new Subject<Recipe[]>();
+
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Test recipe 1',
+  //     'My test recipe best description 1',
+  //     'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 2)],
+  //     1),
+  //   new Recipe(
+  //     'Test recipe 2',
+  //     'My test recipe best description 2',
+  //     'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', [new Ingredient('Potato', 3), new Ingredient('Apple', 2),],
+  //     2),
+  //   new Recipe(
+  //     'Test recipe 3',
+  //     'My test recipe best description 3',
+  //     'https://hips.hearstapps.com/hmg-prod/images/delish-roast-beef-horizontal-1540505165.jpg', null,
+  //     3)
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private ingredientsService: IngredientsService) { }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  getRecipes(): Recipe[] {
+    return this.recipes.slice();
+  }
 
   get(id: number) {
     return this.recipes.find(r => r.id === id);
@@ -39,6 +53,7 @@ export class RecipesService {
 
   delete(id: number) {
     this.recipes = this.recipes.filter(i => i.id === id);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   update(id: number, updated: Recipe) {
@@ -53,6 +68,8 @@ export class RecipesService {
     target.name = updated.name;
     target.description = updated.description;
     target.image = updated.image;
+
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   private addOrUpdateIngredient(ingredient: Ingredient) {

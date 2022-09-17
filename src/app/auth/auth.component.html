@@ -1,60 +1,59 @@
-<div class="row">
-  <div class="col-xs-12">
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-      <div class="mt-2" *ngIf="!isLogin">
-        <label for="username" class="form-label">Username</label>
-        <input class="form-control"
-               formControlName="username"
-               name="username"
-               id="username"
-               type="text"
-               [ngClass]="isInvalidUsername() ? 'is-invalid' : ''">
-        <span *ngIf="isInvalidUsername()" class="text-danger">A valid username should be provided!</span>
-      </div>
-      <div class="mt-2" *ngIf="!isLogin">
-        <label for="firstname" class="form-label">Firstname</label>
-        <input class="form-control"
-               formControlName="firstname"
-               name="firstname"
-               id="firstname"
-               type="text"
-               [ngClass]="isInvalidFirstname() ? 'is-invalid' : ''">
-        <span *ngIf="isInvalidFirstname()" class="text-danger">A valid firstname should be provided!</span>
-      </div>
-      <div class="mt-2" *ngIf="!isLogin">
-        <label for="lastname" class="form-label">Lastname</label>
-        <input class="form-control"
-               formControlName="lastname"
-               name="lastname"
-               id="lastname"
-               type="text"
-               [ngClass]="isInvalidLastname() ? 'is-invalid' : ''">
-        <span *ngIf="isInvalidLastname()" class="text-danger">A valid lastname should be provided!</span>
-      </div>
-      <div class="mt-2">
-        <label for="email" class="form-label">Email</label>
-        <input class="form-control"
-               formControlName="email"
-               name="email"
-               id="email"
-               type="text"
-               [ngClass]="isInvalidEmail() ? 'is-invalid' : ''">
-        <span *ngIf="isInvalidEmail()" class="text-danger">Enter a valid email!</span>
-      </div>
-      <div class="mt-2">
-        <label for="password" class="form-label">Password</label>
-        <input class="form-control"
-               id="password"
-               type="password"
-               formControlName="password"
-               [ngClass]="isInvalidPassword() ? 'is-invalid' : ''">
-        <span *ngIf="isInvalidPassword()" class="text-danger">Minimum password length is 6 symbols!</span>
-      </div>
-      <div class="mt-2">
-        <button class="btn btn-primary" [disabled]="!authForm.valid" type="submit">{{getCurrentModeName()}}</button>
-        |
-        <button class="btn btn-primary" (click)="onSwitchMode()">Switch to {{ getOppositeModeName() }}</button>
-      </div>
-    </form>
+<div class="row justify-content-center mt-5">
+  <div class="col-xs-12 col-md-6">
+    <ng-container *ngIf="isLoading; else form">
+      <app-spinner></app-spinner>
+    </ng-container>
+    <ng-template #form>
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+<!--        <app-alert [messages]="requestErrors" (closed)="onHandleErrors()" *ngIf="requestErrors && requestErrors.length > 0"></app-alert>-->
+        <ng-container *ngIf="!isLoginMode" [formGroupName]="registrationSpecificControlGroupName">
+          <div class="mt-2">
+            <label for="firstname" class="form-label">Firstname</label>
+            <input class="form-control"
+                   formControlName="firstname"
+                   name="firstname"
+                   id="firstname"
+                   type="text"
+                   [ngClass]="isInvalidFirstname() ? 'is-invalid' : ''">
+            <span *ngIf="isInvalidFirstname()" class="text-danger">A valid firstname should be provided!</span>
+          </div>
+          <div class="mt-2">
+            <label for="lastname" class="form-label">Lastname</label>
+            <input class="form-control"
+                   formControlName="lastname"
+                   name="lastname"
+                   id="lastname"
+                   type="text"
+                   [ngClass]="isInvalidLastname() ? 'is-invalid' : ''">
+            <span *ngIf="isInvalidLastname()" class="text-danger">A valid lastname should be provided!</span>
+          </div>
+        </ng-container>
+
+        <div class="mt-2">
+          <label for="email" class="form-label">Email</label>
+          <input class="form-control"
+                 formControlName="email"
+                 name="email"
+                 id="email"
+                 type="text"
+                 [ngClass]="isInvalidEmail() ? 'is-invalid' : ''">
+          <span *ngIf="isInvalidEmail()" class="text-danger">Enter a valid email!</span>
+        </div>
+        <div class="mt-2">
+          <label for="password" class="form-label">Password</label>
+          <input class="form-control"
+                 id="password"
+                 type="password"
+                 formControlName="password"
+                 [ngClass]="isInvalidPassword() ? 'is-invalid' : ''">
+          <span *ngIf="isInvalidPassword()" class="text-danger">Minimum password length is 6 symbols!</span>
+        </div>
+        <div class="mt-2">
+          <button class="btn btn-primary" [disabled]="!authForm.valid" type="submit">{{ getCurrentModeName() }}</button>
+          |
+          <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to {{ getOppositeModeName() }}</button>
+        </div>
+      </form>
+    </ng-template>
   </div>
 </div>
