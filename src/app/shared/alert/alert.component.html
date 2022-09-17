@@ -1,0 +1,8 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+  <h3>Message</h3>
+  <p class="alert-danger" *ngFor="let message of messages">{{ message }}</p>
+  <div class="alert-box-actions">
+    <button class="btn btn-success" (click)="onClose()">Cancel</button>
+  </div>
+</div>
